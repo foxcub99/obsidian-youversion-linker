@@ -8,6 +8,7 @@ if [ "$(git branch --show-current)" != "master" ]; then
 fi
 
 npm run version
+npm i
 npm run check
 npm_package_version=$(node -p "require('./package.json').version")
 
