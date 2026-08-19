@@ -1,5 +1,5 @@
 import ObsidianYouversionLinker from '../main';
-import { App, PluginSettingTab, Setting } from 'obsidian';
+import { App, PluginSettingTab, Setting, type ButtonComponent } from 'obsidian';
 import { booksNames, type LanguageName } from '../books/BooksLists';
 import { generateBooksList } from '../books/Books';
 import { versions } from '../books/Versions';
@@ -112,6 +112,7 @@ export default class SettingTab extends PluginSettingTab {
           .setIcon('plus')
           .setTooltip('Add bible version')
           .onClick(async () => {
+            if (sortedLanguages.length < 1) return;
             this.plugin.settings.bibleVersions.push({
               id: '1',
               language: 'eng',
@@ -120,13 +121,7 @@ export default class SettingTab extends PluginSettingTab {
             this.display();
           });
 
-        button.setDisabled(sortedLanguages.length < 1);
-        if (button.disabled) {
-          if (!button.buttonEl.hasClass('btn-settings-disabled'))
-            button.buttonEl.addClass('btn-settings-disabled');
-        } else {
-          button.buttonEl.removeClass('btn-settings-disabled');
-        }
+        this.setDisableButton(button, sortedLanguages.length < 1);
       });
 
     this.plugin.settings.bibleVersions.forEach((version, index) => {
@@ -216,9 +211,11 @@ export default class SettingTab extends PluginSettingTab {
           .setIcon('plus')
           .setTooltip('Add language of books names')
           .onClick(async () => {
+            if (notSelectedLanguages.length < 1) return;
             this.plugin.settings.selectedBooksLanguages.push(notSelectedLanguages[0]!);
             await this.onSelectedBooksLanguagesUpdate();
           });
+        this.setDisableButton(button, notSelectedLanguages.length < 1);
       });
 
     this.plugin.settings.selectedBooksLanguages.forEach((lang, index) => {
@@ -251,5 +248,15 @@ export default class SettingTab extends PluginSettingTab {
     await this.plugin.saveSettings();
     generateBooksList(this.plugin.settings);
     this.display();
+  }
+
+  setDisableButton(button: ButtonComponent, disabled: boolean) {
+    button.setDisabled(disabled);
+    if (button.disabled) {
+      if (!button.buttonEl.hasClass('btn-settings-disabled'))
+        button.buttonEl.addClass('btn-settings-disabled');
+    } else {
+      button.buttonEl.removeClass('btn-settings-disabled');
+    }
   }
 }

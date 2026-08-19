@@ -6,6 +6,7 @@ import { DEFAULT_SETTINGS, ObsidianYouversionLinkerSettings } from './settings/S
 import GenerateLinks from './GenerateLinks';
 import linkPreview from './preview/LinkPreviewReader';
 import { linkPreviewPlugin } from './preview/LinkPreviewEditor';
+import { migrateSettings } from './settings/SettingsMigrations';
 
 export default class ObsidianYouversionLinker extends Plugin {
   settings: ObsidianYouversionLinkerSettings = DEFAULT_SETTINGS;
@@ -29,11 +30,10 @@ export default class ObsidianYouversionLinker extends Plugin {
   onunload() {}
 
   async loadSettings() {
-    const loaded: unknown = await this.loadData();
-    this.settings = {
-      ...DEFAULT_SETTINGS,
-      ...(loaded as Partial<ObsidianYouversionLinkerSettings>),
-    };
+    const loaded = (await this.loadData()) as Partial<ObsidianYouversionLinkerSettings>;
+    const version = loaded?.version ?? 0;
+    this.settings = migrateSettings(loaded, version);
+    await this.saveData(this.settings);
   }
 
   async saveSettings() {

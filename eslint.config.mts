@@ -29,11 +29,6 @@ export default defineConfig(
   },
   ...obsidianmd.configs.recommended,
   {
-    rules: {
-      'obsidianmd/regex-lookbehind': 'off',
-    },
-  },
-  {
     files: ['test/**/*.ts'],
     languageOptions: {
       globals: { ...globals.jest, ...globals.node },
