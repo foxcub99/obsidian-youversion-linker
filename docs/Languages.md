@@ -27,7 +27,7 @@ Thanks to the community, we have support for the following languages:
 If you want to add support for a new language, you can do so by following these steps:
 
 1. Fork the repository.
-2. Create a new file in `data/books` with the name of the language (e.g. `data/books/pl.json`) with books names.
+2. Create a new file in `data/books` with the name of the language (e.g. `data/books/pl.json`) with books names. In the `docs/books.json` is the empty template you can use.
 3. Import json file to `src/books/BooksLists.ts` as shown in the example:
 
 ```ts
@@ -45,7 +45,7 @@ const booksNames = {
 
 (See the other languages for examples.)
 
-4. Add your name to the list above in this file (`Languages.md`).
+4. Add your name to the list above in this file (`docs/Languages.md`).
 5. If you can, run tests locally using command:
 
 ```sh

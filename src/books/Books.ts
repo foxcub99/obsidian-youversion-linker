@@ -1,25 +1,29 @@
-import _books from '../../data/books/books.json';
 import { booksNames, type LanguageName } from './BooksLists';
 import { ObsidianYouversionLinkerSettings } from '../settings/SettingsData';
-
-export type BookCode = keyof typeof _books;
+import { ALL_BOOKS, type BookCode } from './BooksType';
 
 let books: Record<BookCode, string[]> | null = null;
 
 export function generateBooksList(settings: ObsidianYouversionLinkerSettings) {
-  const activeBooks = _books as Record<BookCode, string[]>;
+  const activeBooks = Object.fromEntries<string[]>(ALL_BOOKS.map((book) => [book, []])) as Record<
+    BookCode,
+    string[]
+  >;
+
   const allBooks = booksNames as Record<LanguageName, Record<BookCode, string[]>>;
 
   settings.selectedBooksLanguages.forEach((lang_name) => {
     const lang = allBooks[lang_name];
     Object.keys(activeBooks).forEach((book) => {
       const names = lang[book as BookCode];
-      if (names) {
-        activeBooks[book as BookCode].push(...names.map(cleanBookName));
-      }
+      if (names) activeBooks[book as BookCode].push(...names.map(cleanBookName));
     });
   });
   return activeBooks;
+}
+
+export function hasDeuterocanonicalBooks(lang: LanguageName): boolean {
+  return Object.keys(booksNames[lang]).length === ALL_BOOKS.length;
 }
 
 export default function getBooks(

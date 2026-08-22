@@ -1,7 +1,7 @@
 import ObsidianYouversionLinker from '../main';
 import { App, PluginSettingTab, Setting, type ButtonComponent } from 'obsidian';
 import { booksNames, type LanguageName } from '../books/BooksLists';
-import { generateBooksList } from '../books/Books';
+import { generateBooksList, hasDeuterocanonicalBooks } from '../books/Books';
 import { versions } from '../books/Versions';
 
 export default class SettingTab extends PluginSettingTab {
@@ -222,7 +222,10 @@ export default class SettingTab extends PluginSettingTab {
       const s = new Setting(containerEl)
         .addDropdown((dropdown) => {
           [...notSelectedLanguages, lang].sort().forEach((name) => {
-            dropdown.addOption(`${name}`, `${name}`);
+            dropdown.addOption(
+              `${name}`,
+              `${name} ${hasDeuterocanonicalBooks(name) ? '(deuterocanonical support)' : ''}`,
+            );
           });
           dropdown.setValue(lang);
           dropdown.onChange(async (value) => {

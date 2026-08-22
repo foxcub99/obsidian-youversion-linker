@@ -64,5 +64,19 @@
   "2JN": ["2john", "2jn"],
   "3JN": ["3john", "3jn"],
   "JUD": ["jude", "jud"],
-  "REV": ["revelation", "rev"]
+  "REV": ["revelation", "rev"],
+  "TOB": ["tobit", "tob"],
+  "JDT": ["judith", "jdt"],
+  "WIS": ["wisdomofsolomon", "wisdom", "wis"],
+  "SIR": ["sirach", "ecclesiasticus", "sir"],
+  "BAR": ["baruch", "bar"],
+  "1MA": ["1maccabees", "1macc", "1ma"],
+  "2MA": ["2maccabees", "2macc", "2ma"],
+  "3MA": ["3maccabees", "3macc", "3ma"],
+  "4MA": ["4maccabees", "4macc", "4ma"],
+  "1ES": ["1esdras", "1esd", "1es"],
+  "2ES": ["2esdras", "2esd", "2es"],
+  "MAN": ["prayerofmanasseh", "manasseh", "man"],
+  "ODA": ["odes", "oda"],
+  "PSS": ["psalmsofsolomon", "pss"]
 }
