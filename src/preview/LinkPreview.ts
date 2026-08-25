@@ -18,8 +18,7 @@ export default class LinkPreviewManager {
   static async processLink(link: HTMLAnchorElement, formatSettings: VerseFormat) {
     const content = await this.processUrl(link.href, formatSettings);
 
-    const popup = document.createElement('div');
-    popup.addClass('preview-youversion');
+    const popup = createDiv({ cls: 'preview-youversion' });
 
     if (content.err) {
       popup
@@ -29,7 +28,16 @@ export default class LinkPreviewManager {
       const formatted = applyFormatting(content.verses, formatSettings);
       const body = bodyForDisplay(formatted, formatSettings);
       const span = popup.createSpan({ cls: 'content-youversion' });
-      (span as HTMLElement).innerHTML = body.replace(/\n/g, '<br>');
+      span.empty();
+
+      const parts = body.split('\n');
+      parts.forEach((part, index) => {
+        span.appendText(part);
+        if (index < parts.length - 1) {
+          span.createEl('br');
+        }
+      });
+
       popup
         .createSpan({ cls: 'info-youversion' })
         .setText(content.info.title + ' ' + content.info.version);
@@ -49,7 +57,7 @@ export default class LinkPreviewManager {
 
           if (fmt === 'translation') {
             const rangeCombined = await this.processSingleVerse(url);
-            if (rangeCombined.err) throw 1;
+            if (rangeCombined.err) throw new Error('Failed to load combined range');
 
             const singleUrls = verseNumbers.map((n) =>
               this.buildSingleVerseUrl(parsed.versionId, parsed.book, parsed.chapter, n),
@@ -89,7 +97,7 @@ export default class LinkPreviewManager {
 
             result += baseText.substring(curPos);
 
-            if (!result || result.length < 1) throw 1;
+            if (!result || result.length < 1) throw new Error('Empty verse range output');
 
             this.cache[url] = { err: false, info: rangeCombined.info, verses: result };
           } else {
@@ -100,7 +108,7 @@ export default class LinkPreviewManager {
 
             if (singles.some((s) => !s || s.err)) {
               const rangeCombined = await this.processSingleVerse(url);
-              if (rangeCombined.err) throw 1;
+              if (rangeCombined.err) throw new Error('Failed to load range fallback');
               this.cache[url] = {
                 err: false,
                 info: rangeCombined.info,
@@ -113,7 +121,7 @@ export default class LinkPreviewManager {
                   ? texts.join(' ').replace(/\s+/g, ' ').trim()
                   : texts.join('\n');
               const firstSingle = singles[0];
-              if (!firstSingle) throw 1;
+              if (!firstSingle) throw new Error('No valid single verses found');
               this.cache[url] = { err: false, info: firstSingle.info, verses: combined };
             }
           }
@@ -137,7 +145,7 @@ export default class LinkPreviewManager {
     try {
       const res = await requestUrl(url);
       const data = parseVerseData(res.text);
-      if (!data) throw 1;
+      if (!data) throw new Error('Failed to parse verse data');
 
       this.cache[url] = { err: false, info: data.info, verses: data.verses };
       return this.cache[url];

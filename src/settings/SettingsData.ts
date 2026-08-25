@@ -47,7 +47,7 @@ export const DEFAULT_SETTINGS: ObsidianYouversionLinkerSettings = {
   linkPreviewLive: true,
   linkTrigger: '@',
   embedTrigger: '>',
-  footnoteTrigger: '(?<!\\[)\\^',
+  footnoteTrigger: '(?:[^\\[]|^)\\^',
   selectedBooksLanguages: ['English'],
   calloutName: 'Bible',
   verseFormat: {

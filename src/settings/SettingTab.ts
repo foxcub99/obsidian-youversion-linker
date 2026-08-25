@@ -3,6 +3,7 @@ import { App, PluginSettingTab, Setting, type ButtonComponent } from 'obsidian';
 import { booksNames, type LanguageName } from '../books/BooksLists';
 import { generateBooksList, hasDeuterocanonicalBooks } from '../books/Books';
 import { versions } from '../books/Versions';
+import type { VerseFormat } from './SettingsData';
 
 export default class SettingTab extends PluginSettingTab {
   plugin: ObsidianYouversionLinker;
@@ -56,7 +57,7 @@ export default class SettingTab extends PluginSettingTab {
     this.bookLanguageSettings();
 
     new Setting(containerEl)
-      .setName('Verse Formatting Options')
+      .setName('Verse formatting options')
       .setDesc('Sets how to format the verses in quotes and previews.')
       .addDropdown((dropdown) => {
         dropdown.addOption('translation', 'Translation (natural paragraphs)');
@@ -64,13 +65,13 @@ export default class SettingTab extends PluginSettingTab {
         dropdown.addOption('single-verse', 'Single verse per line');
         dropdown.setValue(this.plugin.settings.verseFormat.text);
         dropdown.onChange(async (value) => {
-          this.plugin.settings.verseFormat.text = value as any;
+          this.plugin.settings.verseFormat.text = value as VerseFormat['text'];
           await this.plugin.saveSettings();
         });
       });
 
     new Setting(containerEl)
-      .setName('Verse Number Formatting Options')
+      .setName('Verse number formatting options')
       .setDesc('Sets how to format the verse numbers in quotes and previews.')
       .addDropdown((dropdown) => {
         dropdown.addOption('none', 'None');
@@ -78,14 +79,14 @@ export default class SettingTab extends PluginSettingTab {
         dropdown.addOption('dot', '1.');
         dropdown.addOption('paren', '1)');
         dropdown.addOption('dash', '1 -');
-        dropdown.addOption('bold', '**1** (bold)');
-        dropdown.addOption('italic', '*1* (italic)');
+        dropdown.addOption('bold', '**1** (Bold)');
+        dropdown.addOption('italic', '*1* (Italic)');
         dropdown.addOption('superscript', '^1 (superscript)');
         dropdown.addOption('superscript-bold', '**^1** (bolded superscript)');
         dropdown.addOption('superscript-italic', '*^1* (italic superscript)');
         dropdown.setValue(this.plugin.settings.verseFormat.number);
         dropdown.onChange(async (value) => {
-          this.plugin.settings.verseFormat.number = value as any;
+          this.plugin.settings.verseFormat.number = value as VerseFormat['number'];
           await this.plugin.saveSettings();
         });
       });
@@ -119,7 +120,7 @@ export default class SettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName('Callout name')
       .setDesc(
-        "When quoting verse, the name of the callout block. Can be set to any build in callout names (eg: 'Quote', 'info'), by default is set to custom callout 'Bible'.",
+        "When quoting verse, the name of the callout block. Can be set to any build in callout names (eg: 'Quote', 'info'), by default is set to custom callout 'bible'.",
       )
       .addText((text) => {
         text.setValue(this.plugin.settings.calloutName);

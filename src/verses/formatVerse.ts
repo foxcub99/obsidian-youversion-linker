@@ -2,7 +2,7 @@ import { VerseFormat } from '../settings/SettingsData';
 import { escapeMarkdown } from '../utils/Markdown';
 
 export function applyFormatting(raw: string, format: VerseFormat): string {
-  const numberFormat = (n: string) => {
+  const numberFormat = (n: string): string => {
     switch (format.number) {
       case 'none':
         return '';
@@ -31,10 +31,13 @@ export function applyFormatting(raw: string, format: VerseFormat): string {
 
   switch (format.text) {
     case 'translation': {
-      return raw.replace(/\[(\d+)\]\s?/g, (_m, n) => numberFormat(n) || '');
+      return raw.replace(/\[(\d+)\]\s?/g, (_m: string, n: string) => numberFormat(n) || '');
     }
     case 'manuscript': {
-      const replaced = raw.replace(/\[(\d+)\]\s?/g, (_m, n) => numberFormat(n) || '');
+      const replaced = raw.replace(
+        /\[(\d+)\]\s?/g,
+        (_m: string, n: string) => numberFormat(n) || '',
+      );
       return replaced.replace(/\s*\n\s*/g, ' ').trim();
     }
     case 'single-verse': {
