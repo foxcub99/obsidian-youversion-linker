@@ -3,6 +3,7 @@ import { BibleVersion } from '../settings/SettingsData';
 import Verse, { VerseElement } from './Verse';
 import { applyFormatting, bodyForDisplay } from './formatVerse';
 import type { VerseFormat } from '../settings/SettingsData';
+import { QuoteSettings } from '../settings/SettingsData';
 
 export default class VerseEmbed extends Verse {
   constructor(
@@ -14,6 +15,7 @@ export default class VerseEmbed extends Verse {
     private insertNewLine: boolean,
     private calloutName: string,
     private verseFormat: VerseFormat,
+    private quoteSettings: QuoteSettings,
   ) {
     super(version, bookUrl, book, chapter, verses);
   }
@@ -26,8 +28,23 @@ export default class VerseEmbed extends Verse {
     } else {
       const formatted = applyFormatting(content.verses, this.verseFormat);
       const body = bodyForDisplay(formatted, this.verseFormat);
+
+      let calloutIcon = this.quoteSettings.showBibleIcon
+        ? `[!${this.calloutName}]`
+        : this.calloutName;
+
+      if (this.quoteSettings.showBibleIcon && this.quoteSettings.collapsibleVerses) {
+        if (this.quoteSettings.collapsedByDefault) {
+          calloutIcon += '-';
+        } else {
+          calloutIcon += '+';
+        }
+      }
+
+      const versionText = this.quoteSettings.showTranslation ? ` ${content.info.version}` : '';
+
       // prettier-ignore
-      return `${p}>[!${this.calloutName}] [${this.toSimpleText()} ${content.info.version}](${this.getUrl()})\n>${body.replace(/\n/g,'\n>')}\n`;
+      return `${p}>${calloutIcon} [${this.toSimpleText()}${versionText}](${this.getUrl()})\n>${body.replace(/\n/g,'\n>')}\n`;
     }
   }
 }

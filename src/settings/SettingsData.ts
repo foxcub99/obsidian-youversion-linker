@@ -22,6 +22,13 @@ export interface VerseFormat {
     | 'superscript-italic'; // <sup><i>1</i></sup>
 }
 
+export interface QuoteSettings {
+  showTranslation: boolean;
+  showBibleIcon: boolean;
+  collapsibleVerses: boolean;
+  collapsedByDefault: boolean;
+}
+
 export interface ObsidianYouversionLinkerSettings {
   version: number;
   bibleVersions: BibleVersion[];
@@ -33,6 +40,7 @@ export interface ObsidianYouversionLinkerSettings {
   selectedBooksLanguages: LanguageName[];
   calloutName: string;
   verseFormat: VerseFormat;
+  quoteSettings: QuoteSettings;
 }
 
 export const DEFAULT_SETTINGS: ObsidianYouversionLinkerSettings = {
@@ -53,5 +61,11 @@ export const DEFAULT_SETTINGS: ObsidianYouversionLinkerSettings = {
   verseFormat: {
     text: 'translation',
     number: 'superscript',
+  },
+  quoteSettings: {
+    showTranslation: true,
+    showBibleIcon: true,
+    collapsibleVerses: false,
+    collapsedByDefault: false,
   },
 };
