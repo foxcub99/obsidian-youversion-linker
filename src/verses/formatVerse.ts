@@ -1,5 +1,5 @@
-import { VerseFormat } from 'src/settings/SettingsData';
-import { escapeMarkdown } from 'src/utils/Markdown';
+import { VerseFormat } from '../settings/SettingsData';
+import { escapeMarkdown } from '../utils/Markdown';
 
 export function applyFormatting(raw: string, format: VerseFormat): string {
   const numberFormat = (n: string) => {
@@ -43,7 +43,7 @@ export function applyFormatting(raw: string, format: VerseFormat): string {
         const re = /(?:\[(\d+)\]\s*)([\s\S]*?)(?=(?:\[\d+\]\s*)|$)/g;
         let m: RegExpExecArray | null;
         while ((m = re.exec(raw))) {
-          const num = m[1];
+          const num = m[1] ?? '';
           let body = (m[2] || '').replace(/\s*\n\s*/g, ' ').trim();
           lines.push(`${numberFormat(num) || ''}${body}`.trim());
         }

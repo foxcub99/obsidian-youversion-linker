@@ -1,8 +1,7 @@
-import { escapeMarkdown } from 'src/utils/Markdown';
 import LinkPreviewManager from '../preview/LinkPreview';
 import Verse, { VerseElement } from './Verse';
 import { applyFormatting, bodyForDisplay } from './formatVerse';
-import type { BibleVersion, VerseFormat } from 'src/settings/SettingsData';
+import type { BibleVersion, VerseFormat } from '../settings/SettingsData';
 
 export default class VerseFootnote extends Verse {
   constructor(

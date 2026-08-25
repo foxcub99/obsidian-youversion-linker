@@ -1,9 +1,8 @@
-import { escapeMarkdown } from 'src/utils/Markdown';
 import LinkPreviewManager from '../preview/LinkPreview';
 import { BibleVersion } from '../settings/SettingsData';
 import Verse, { VerseElement } from './Verse';
 import { applyFormatting, bodyForDisplay } from './formatVerse';
-import type { VerseFormat } from 'src/settings/SettingsData';
+import type { VerseFormat } from '../settings/SettingsData';
 
 export default class VerseEmbed extends Verse {
   constructor(

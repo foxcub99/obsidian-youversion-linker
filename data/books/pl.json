@@ -64,5 +64,19 @@
   "2JN": ["2jana", "2listjana", "2j"],
   "3JN": ["3jana", "3listjana", "3j"],
   "JUD": ["judy", "listjudy", "jud"],
-  "REV": ["objawienia", "księgaobjawienia", "obj", "ap"]
+  "REV": ["objawienia", "księgaobjawienia", "obj", "ap"],
+  "TOB": ["tobiasza", "księgatobiasza", "tb"],
+  "JDT": ["judyty", "księgajudyty", "jdt"],
+  "WIS": ["mądrości", "księgamądrości", "mdr"],
+  "SIR": ["syracha", "mądrośćsyracha", "eklezjastyk", "syr"],
+  "BAR": ["barucha", "księgabarucha", "bar"],
+  "1MA": ["1machabejska", "1księgamachabejska", "1mch"],
+  "2MA": ["2machabejska", "2księgamachabejska", "2mch"],
+  "3MA": ["3machabejska", "3księgamachabejska", "3mch"],
+  "4MA": ["4machabejska", "4księgamachabejska", "4mch"],
+  "1ES": ["1ezdrasza", "1księgaezdrasza", "1ezd"],
+  "2ES": ["2ezdrasza", "2księgaezdrasza", "2ezd"],
+  "MAN": ["modlitwamanassesa", "manassesa", "mod"],
+  "ODA": ["ody", "oda"],
+  "PSS": ["psalmysalomona", "pss"]
 }

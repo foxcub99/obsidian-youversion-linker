@@ -1,10 +1,10 @@
 import { MarkdownPostProcessorContext } from 'obsidian';
 import LinkPreviewManager from './LinkPreview';
-import type { VerseFormat } from 'src/settings/SettingsData';
+import type { VerseFormat } from '../settings/SettingsData';
 
 export default function linkPreview(
   element: HTMLElement,
-  context: MarkdownPostProcessorContext,
+  _context: MarkdownPostProcessorContext,
   formatSettings: VerseFormat,
 ) {
   const targetLinks = Array.from(element.getElementsByTagName('a')).filter(
@@ -15,7 +15,7 @@ export default function linkPreview(
   );
 
   for (const link of targetLinks) {
-    LinkPreviewManager.processLink(link, formatSettings);
+    void LinkPreviewManager.processLink(link, formatSettings);
   }
   LinkPreviewManager.clearCache(targetLinks.map((ele) => ele.href));
 }

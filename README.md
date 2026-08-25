@@ -4,7 +4,7 @@
 
 **Automatically link bible verses in your notes to [YouVersion bible](https://www.bible.com/).**
 
-**List of supported languages can be found [here](./Languages.md).**
+**List of supported languages can be found [here](./docs/Languages.md).**
 
 You can for example type:
 
@@ -17,7 +17,7 @@ It also supports multiple verses like: `John 3:16,18-20`.
 `@`, `>` and `^` chars are triggers for suggestion and they can be changed in settings.
 In settings you can select which version of bible you want to use and books names in which language will be detected.
 
-I'm from Poland so plugin supports polish books names (eq. `J 1:1-6`, `Mt 24,1`). If you would like it to support your language books names read the guide in [Languages.md](./Languages.md).
+I'm from Poland so plugin supports polish books names (eq. `J 1:1-6`, `Mt 24,1`). If you would like it to support your language books names read the guide in [docs/Languages.md](./docs/Languages.md).
 
 The plugins is heavily inspired by [obsidian-bible-reference](https://github.com/tim-hub/obsidian-bible-reference) (also i have "borrowed" some code from there) so check it out.
 

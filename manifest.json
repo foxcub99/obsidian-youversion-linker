@@ -1,8 +1,8 @@
 {
   "id": "youversion-linker",
   "name": "YouVersion Linker",
-  "version": "1.6.5",
-  "minAppVersion": "0.15.0",
+  "version": "1.8.1",
+  "minAppVersion": "1.2.3",
   "description": "Automatically link bible verses in your notes to YouVersion bible.",
   "author": "jaanonim",
   "authorUrl": "https://jaanonim.github.io/",

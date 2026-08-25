@@ -11,7 +11,7 @@ import {
   WidgetType,
 } from '@codemirror/view';
 import LinkPreviewManager from './LinkPreview';
-import type { VerseFormat } from 'src/settings/SettingsData';
+import type { VerseFormat } from '../settings/SettingsData';
 
 class LinkPreviewView implements PluginValue {
   decorations: DecorationSet;
@@ -37,6 +37,7 @@ class LinkPreviewView implements PluginValue {
     let last_t: number = 0;
     let content: string = '';
     let urls: Array<string> = [];
+    const formatSettings = this.formatSettings;
 
     for (let { from, to } of view.visibleRanges) {
       syntaxTree(view.state).iterate({
@@ -57,7 +58,7 @@ class LinkPreviewView implements PluginValue {
                 last_f,
                 last_t,
                 Decoration.replace({
-                  widget: new LinkTooltip(content, slice, this.formatSettings),
+                  widget: new LinkTooltip(content, slice, formatSettings),
                 }),
               );
             }

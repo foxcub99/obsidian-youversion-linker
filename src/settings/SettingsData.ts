@@ -1,3 +1,7 @@
+import type { LanguageName } from '../books/BooksLists';
+
+const CONFIG_VERSION = 1;
+
 export interface BibleVersion {
   id: string;
   language: string;
@@ -19,18 +23,20 @@ export interface VerseFormat {
 }
 
 export interface ObsidianYouversionLinkerSettings {
+  version: number;
   bibleVersions: BibleVersion[];
   linkPreviewRead: boolean;
   linkPreviewLive: boolean;
   linkTrigger: string;
   embedTrigger: string;
   footnoteTrigger: string;
-  selectedBooksLanguages: string[];
+  selectedBooksLanguages: LanguageName[];
   calloutName: string;
   verseFormat: VerseFormat;
 }
 
 export const DEFAULT_SETTINGS: ObsidianYouversionLinkerSettings = {
+  version: CONFIG_VERSION,
   bibleVersions: [
     {
       id: '1',
